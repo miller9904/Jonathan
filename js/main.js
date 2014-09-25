@@ -29,6 +29,15 @@ var Jonathan = {
 	speechRecognizer: function () {
 		// TODO: add ASR speech recognition code
 		// This is an object constructor
+	},
+	
+	// Predefined action patterns
+	speechIntents: {
+		TAKE_NOTE:       "TAKE_NOTE",
+		SET_ALARM:       "SET_ALARM",
+		SET_TIMER:       "SET_TIMER",
+		ANSWER_QUESTION: "ANSWER_QUESTION",
+		FREE_FORM:       "FREE_FORM"
 	}
 	
 }
