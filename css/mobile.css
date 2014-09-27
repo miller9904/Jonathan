@@ -1,0 +1,10 @@
+/* Mobile CSS for Jonathan */
+
+@viewport {
+	orientation: portrait;
+}
+
+div.logo {
+	width: 20%;
+	height: 20%;
+}
