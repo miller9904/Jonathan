@@ -20,3 +20,7 @@ div#content {
 	left: 15%;
 	padding-top: 100px;
 }
+
+input#textInput {
+	position: absolute;
+}
