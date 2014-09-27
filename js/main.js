@@ -2,6 +2,10 @@
 
 var Jonathan = {
 	
+	init: function () {
+		WinJS.UI.processAll();
+	},
+	
 	// Avatar related code
 	avatar: {
 		// Methods of animation
@@ -36,8 +40,7 @@ var Jonathan = {
 		TAKE_NOTE:       "TAKE_NOTE",
 		SET_ALARM:       "SET_ALARM",
 		SET_TIMER:       "SET_TIMER",
-		ANSWER_QUESTION: "ANSWER_QUESTION",
-		FREE_FORM:       "FREE_FORM"
+		ANSWER_QUESTION: "ANSWER_QUESTION"
 	}
 	
 }

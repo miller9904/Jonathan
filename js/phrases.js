@@ -1,11 +1,15 @@
 // Jonathan's premade responses
 var phrases = {
-	WHO_ARE_YOU: [
+	// Returns a random number between min (inclusive) and max (exclusive)
+	get: function(phrases) {
+	  return phrases[Math.floor(Math.random() * phrases.length + 0)];
+	},
+	
+	NAME: [
 		"I'm Jonathan, your personal assistant.",
 		"I'm your personal assistant.",
-		"I'm Jonathan.",
-		"My name is Jonathan.",
-		"Jonathan."
+		"Hi, I'm Jonathan.",
+		"Hi, My name is Jonathan."
 	],
 	
 	UNDERSTAND_ERROR: [
