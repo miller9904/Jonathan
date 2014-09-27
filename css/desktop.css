@@ -1,0 +1,12 @@
+/* Desktop CSS for Jonathan */
+
+div.logo {
+	width: 100px;
+	height: 100px;
+}
+
+input#textInput {
+	width: 40%;
+	left: 30%;
+	bottom: 10px;
+}

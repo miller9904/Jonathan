@@ -1,0 +1,16 @@
+/* Mobile CSS for Jonathan */
+
+@viewport {
+	orientation: portrait;
+}
+
+div.logo {
+	width: 20%;
+	height: 20%;
+}
+
+input#textInput {
+	width: 90%;
+	left: 2%;
+	bottom: 5px;
+}
