@@ -6,21 +6,28 @@
 		<meta name="viewport" content="width=device-width">
 		<meta charset="utf-8"/>
 		
+		<link rel="icon" href="logo.svg"/>
 		<link href="winjs/css/ui-light.css" rel="stylesheet">
 		<link href="css/main.css" rel="stylesheet"/>
 		<link href="css/desktop.css" rel="stylesheet" media="(min-width: 768px)"/>
 		<link href="css/mobile.css" rel="stylesheet" media="(max-width: 360px) and (orientation: portrait), (max-width: 640px) and (orientation: landscape)"/>
+		
 		<script src="js/main.js"></script>
 		<script src="js/phrases.js"></script>
 		<script src="winjs/js/base.js"></script>
     	<script src="winjs/js/ui.js"></script>
+		<script src="js/recorder.js/recorder.js"></script>
+		<script src="js/pocketsphinx.js/webapp/js/pocketsphinx.js"></script>
 		<script>
 		window.onload = function () {
 			Jonathan.init();
 			
 			var content = document.getElementById('content');
+			var textInput = document.getElementById('textInput');
+			
 			content.innerHTML = phrases.get(phrases.NAME);
 			WinJS.UI.Animation.enterPage(content, null);
+			
 		}
 		</script>
 	</head>
@@ -34,118 +41,27 @@
 		
 		<div class="logo">
 			<!-- logo -->
-			<svg
-			   viewBox="0 0 200 200"
-			   id="logo"
-			   version="1.1"
-			  <defs
-			     id="defs4">
-			    <marker
-			       inkscape:stockid="Arrow1Lstart"
-			       orient="auto"
-			       refY="0.0"
-			       refX="0.0"
-			       id="Arrow1Lstart"
-			       style="overflow:visible">
-			      <path
-			         id="path3774"
-			         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
-			         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt"
-			         transform="scale(0.8) translate(12.5,0)" />
+			<svg viewBox="0 0 200 200" id="logo" version="1.1" <defs="">
+			    <marker inkscape:stockid="Arrow1Lstart" orient="auto" refY="0.0" refX="0.0" id="Arrow1Lstart" style="overflow:visible">
+			      <path id="path3774" d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z " style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt" transform="scale(0.8) translate(12.5,0)"></path>
 			    </marker>
-			    <inkscape:path-effect
-			       effect="skeletal"
-			       id="path-effect3773"
-			       is_visible="true"
-			       pattern="M 0,0 0,10 10,5 z"
-			       copytype="single_stretched"
-			       prop_scale="1"
-			       scale_y_rel="false"
-			       spacing="0"
-			       normal_offset="0"
-			       tang_offset="0"
-			       prop_units="false"
-			       vertical_pattern="false"
-			       fuse_tolerance="0" />
-			    <inkscape:path-effect
-			       effect="skeletal"
-			       id="path-effect3001"
-			       is_visible="true"
-			       pattern="m 7,853.36218 0,10 10,-5 z"
-			       copytype="single_stretched"
-			       prop_scale="1"
-			       scale_y_rel="false"
-			       spacing="0"
-			       normal_offset="0"
-			       tang_offset="0"
-			       prop_units="false"
-			       vertical_pattern="false"
-			       fuse_tolerance="0" />
-			    <inkscape:path-effect
-			       effect="skeletal"
-			       id="path-effect2991"
-			       is_visible="true"
-			       pattern="M 0,0 0,10 10,5 z"
-			       copytype="single_stretched"
-			       prop_scale="1"
-			       scale_y_rel="false"
-			       spacing="0"
-			       normal_offset="0"
-			       tang_offset="0"
-			       prop_units="false"
-			       vertical_pattern="false"
-			       fuse_tolerance="0" />
-			  </defs>
-			  <sodipodi:namedview
-			     id="base"
-			     pagecolor="#ffffff"
-			     bordercolor="#666666"
-			     borderopacity="1.0"
-			     inkscape:pageopacity="0.0"
-			     inkscape:pageshadow="2"
-			     inkscape:zoom="1.0721732"
-			     inkscape:cx="75.006833"
-			     inkscape:cy="100"
-			     inkscape:document-units="px"
-			     inkscape:current-layer="layer1"
-			     showgrid="false"
-			     inkscape:window-width="1366"
-			     inkscape:window-height="705"
-			     inkscape:window-x="-8"
-			     inkscape:window-y="-8"
-			     inkscape:window-maximized="1" />
-			  <metadata
-			     id="metadata7">
-			    <rdf:RDF>
-			      <cc:Work
-			         rdf:about="">
+			    <inkscape:path-effect effect="skeletal" id="path-effect3773" is_visible="true" pattern="M 0,0 0,10 10,5 z" copytype="single_stretched" prop_scale="1" scale_y_rel="false" spacing="0" normal_offset="0" tang_offset="0" prop_units="false" vertical_pattern="false" fuse_tolerance="0"></inkscape:path-effect>
+			    <inkscape:path-effect effect="skeletal" id="path-effect3001" is_visible="true" pattern="m 7,853.36218 0,10 10,-5 z" copytype="single_stretched" prop_scale="1" scale_y_rel="false" spacing="0" normal_offset="0" tang_offset="0" prop_units="false" vertical_pattern="false" fuse_tolerance="0"></inkscape:path-effect>
+			    <inkscape:path-effect effect="skeletal" id="path-effect2991" is_visible="true" pattern="M 0,0 0,10 10,5 z" copytype="single_stretched" prop_scale="1" scale_y_rel="false" spacing="0" normal_offset="0" tang_offset="0" prop_units="false" vertical_pattern="false" fuse_tolerance="0"></inkscape:path-effect>
+			  
+			  <sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="1.0721732" inkscape:cx="75.006833" inkscape:cy="100" inkscape:document-units="px" inkscape:current-layer="layer1" showgrid="false" inkscape:window-width="1366" inkscape:window-height="705" inkscape:window-x="-8" inkscape:window-y="-8" inkscape:window-maximized="1"></sodipodi:namedview>
+			  <metadata id="metadata7">
+			    <rdf:rdf>
+			      <cc:work rdf:about="">
 			        <dc:format>image/svg+xml</dc:format>
-			        <dc:type
-			           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+			        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"></dc:type>
 			        <dc:title></dc:title>
-			      </cc:Work>
-			    </rdf:RDF>
+			      </cc:work>
+			    </rdf:rdf>
 			  </metadata>
-			  <g
-			     inkscape:label="Layer 1"
-			     inkscape:groupmode="layer"
-			     id="layer1"
-			     transform="translate(0,-852.36218)">
-			    <path
-			       sodipodi:type="arc"
-			       style="fill:none;stroke:#3003d6;stroke-width:1.00001351000000000;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker-start:none;"
-			       id="path2997"
-			       sodipodi:cx="71"
-			       sodipodi:cy="91.5"
-			       sodipodi:rx="6"
-			       sodipodi:ry="5.5"
-			       d="m 77,91.5 a 6,5.5 0 1 1 -12,0 6,5.5 0 1 1 12,0 z"
-			       transform="matrix(12.5,0,0,13.636364,-787.5,-295.36513)" />
-			    <path
-			       style="fill:none;stroke:#3003d6;stroke-width:24.94292830999999900;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker-start:none"
-			       d="m 99.971463,939.58668 -2e-6,25.30404"
-			       id="path3768"
-			       inkscape:connector-curvature="0" />
+			  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(0,-852.36218)">
+			    <path sodipodi:type="arc" style="fill:none;stroke:#3003d6;stroke-width:1.00001351000000000;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker-start:none;" id="path2997" sodipodi:cx="71" sodipodi:cy="91.5" sodipodi:rx="6" sodipodi:ry="5.5" d="m 77,91.5 a 6,5.5 0 1 1 -12,0 6,5.5 0 1 1 12,0 z" transform="matrix(12.5,0,0,13.636364,-787.5,-295.36513)"></path>
+			    <path style="fill:none;stroke:#3003d6;stroke-width:24.94292830999999900;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker-start:none" d="m 99.971463,939.58668 -2e-6,25.30404" id="path3768" inkscape:connector-curvature="0"></path>
 			  </g>
 			</svg>
 			<!-- End Logo -->
