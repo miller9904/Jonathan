@@ -1,0 +1,11 @@
+{
+  "name": "Jonathan",
+  "main": "material-index.html",
+  "window": {
+    "title": "Jonathan",
+    "toolbar": false,
+	"resizable": true,
+	"icon": "logo.svg",
+	"show": false
+  }
+}

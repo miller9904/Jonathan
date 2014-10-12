@@ -1,0 +1,95 @@
+<!doctype html>
+<html ng-app="Jonathan">
+<head>
+	<title>Jonathan</title>
+	<meta name="viewport" content="width=device-width">
+	<meta charset="utf-8"/>
+	
+	<link rel="icon" href="logo.svg"/>
+	<!--
+	<link href="winjs/css/ui-light.css" rel="stylesheet">
+	-->
+	<link href="../AngularJS 1.3.0/angular-material/angular-material.min.css" rel="stylesheet"/>
+	<link href="css/main.css" rel="stylesheet"/>
+	<link href="css/desktop.css" rel="stylesheet" media="(min-width: 768px)"/>
+	<link href="css/mobile.css" rel="stylesheet" media="(max-width: 360px) and (orientation: portrait), (max-width: 640px) and (orientation: landscape)"/>
+	
+	<script src="js/main.js"></script>
+	<script src="js/phrases.js"></script>
+	<!--
+	<script src="winjs/js/base.js"></script>
+	<script src="winjs/js/ui.js"></script>
+	-->
+	<script src="../AngularJS 1.3.0/angular.min.js"></script>
+	<script src="../AngularJS 1.3.0/angular-animate.min.js"></script>
+	<!--<script src="../AngularJS 1.3.0/angular-touch.min.js"></script>-->
+	<script src="../AngularJS 1.3.0/angular-aria.min.js"></script>
+	<script src="../AngularJS 1.3.0/angular-material/angular-material.min.js"></script>
+	<script src="js/hammer.min.js"></script>
+	<script src="js/recorder.js/recorder.js"></script>
+	<script src="js/pocketsphinx.js/webapp/js/pocketsphinx.js"></script>
+	
+	<script>
+	angular.module('Jonathan', ['ngMaterial'])
+
+	.controller('AppCtrl', ['$scope', function($scope, $timeout, $materialSidenav) {
+		$scope.openSidebar = function () {
+			//$materialSidenav('left').toggle();
+		}
+	}]);
+	</script>
+</head>
+<body>
+
+<div id="background"></div>
+
+<div ng-controller="AppCtrl" id="content">
+	<material-toolbar class="material-theme-light">
+	    <h2 class="material-toolbar-tools">
+			<img src="images/menu.svg" ng-click="openSidebar()"/>
+	    	<span>Jonathan</span>
+		</h2>
+	</material-toolbar>
+	
+	<material-button class="material-button-fab" id="micBtn">
+		<material-icon icon="images/mic.svg" style="width:24px;height:24px;"></material-icon>
+		<material-tooltip>
+		Press to speak
+		</material-tooltip>
+	</material-button>
+    
+	<div class="cardContainer">
+		<material-card style="text-align: center;">
+			Hi, I'm Jonathan!  Press the <img src="images/mic.svg" style="vertical-align: text-bottom;"/> button to talk to me!
+		</material-card>
+		<material-card>
+			<div class="cardHeader">Are you at home?</div> 
+			We can help you more if we know where you live.
+			<br/>
+			<br/>
+			<material-button>Yes</material-button> <material-button>No</material-button>
+		</material-card>
+		
+		<material-card>
+		<div class="cardHeader">Take out the trash</div>
+		<sm>at 6:30pm</sm>
+		<br/>
+		<br/>
+		<material-button>Dismiss</material-button>
+		</material-card>
+	</div>
+	
+	<!--<material-sidenav class="material-sidenav-left" component-id="left" layout="vertical" closed>
+      	<material-toolbar class="material-theme-dark">
+        	<h1 class="material-toolbar-tools">Settings</h1>
+      	</material-toolbar>
+		<material-content class="material-content-padding">
+			<material-checkbox ng-model="data.cbLocation" aria-label="Location Checkbox">
+    			Allow us to use your location
+  			</material-checkbox>
+		</material-content>
+	</material-sidenav>-->
+</div>
+
+</body>
+</html>

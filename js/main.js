@@ -100,8 +100,9 @@ var Jonathan = {
 		
 		this.listenForActivationKeyword = function () {
 			// Add PocketSphinx keyword spotter
-			
 			var keywordEvent = new Event('keywordSpotted');
+			
+			
 		}
 		
 		this.startRecording = function () {
@@ -128,7 +129,7 @@ var Jonathan = {
 								recorder.clear();
 								resolve(xhr.responseText);
 							} else {
-								console.log('request to http://seccominc.majolu.com/Jonathan/NuanceASR.php return error status ' + xhr.status);
+								console.log('request to the speech server returned error status ' + xhr.status);
 								reject(xhr.status);
 							}
 						}
@@ -159,4 +160,15 @@ var Jonathan = {
 		ANSWER_QUESTION: "ANSWER_QUESTION"
 	}
 	
+}
+
+var createEvalTool = function () {
+	var evalTool = document.createElement('div');
+	evalTool.innerHTML = '<textbox style="width: 100px; height: 80px;" id="evalTB"></textbox><br\><button onclick="eval(document.getElementById(\"evalTB\").value)">Run Code </button>';
+	evalTool.style.border = '1px solid black';
+	evalTool.style.padding = '10px';
+	evalTool.style.top = "80px";
+	evalTool.style.right = "40px";
+	evalTool.style.position = "absolute";
+	document.body.appendChild(evalTool);
 }
