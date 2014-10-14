@@ -34,12 +34,28 @@
 			var card = document.getElementById('testCard');
 			var cardOffsetLeft = card.offsetLeft;
 			var hammer = new Hammer(card);
+			var windowWidth = window.innerWidth;
 			
 			hammer.on('pan', function(event) {
 				//console.log(event);
 				//console.log(card.offsetLeft);
-				console.log(card.offsetLeft - event.deltaX);
-				card.style.left = cardOffsetLeft - event.deltaX + 'px';
+				console.log(cardOffsetLeft + event.deltaX);
+				card.style.left = cardOffsetLeft + event.deltaX + 'px';
+				
+				
+				if (event.eventType == 4) {
+					if (Math.abs(event.deltaX) >= ((windowWidth / 100) * 10)) {
+						console.log('Close Card');
+					} else {
+						console.log('Recenter card');
+						
+						var i=0;
+						while (i < cardOffsetLeft) {
+							card.style.left = card.style.left - 1 + 'px';
+							i++;
+						}
+					}
+				}
 			});
 			
 		}
