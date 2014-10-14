@@ -3,60 +3,27 @@
 var Jonathan = {
 	
 	init: function () {
-		WinJS.UI.processAll().done(function () {
-			var appBar = document.getElementById("appBar");
-			var recognizer = new Jonathan.speechRecognizer();
+		
+		angular.module('Jonathan', ['ngMaterial']);  // This is simply to make the UI work.  We aren't using AngularJS for anything else.
+		
+		// WebSocket communications unit
+		/*var server = new WebSocket('ws://localhost:8080/endpoint');
+		
+		server.onmessage = function (event) {
+			// handle messages from the server
+			var message = JSON.parse(event.data);
+			var cardData = '';
+			console.log(message);  // For testing purposes
 			
-			
-			var appBarOpen = function (event) {
-				console.log('beforeshow event fired');
-				recognizer.startRecording();
+			if (message.header) {
+				cardData = '<div class="cardHeader">' + message.header + '</div><br/><br/>';
 			}
 			
-			var appBarClose = function (event) {
-				console.log('beforehide event fired');
-				recognizer.stopRecording();
-				recognizer.recognize().then(function (resolved, rejected) {
-					if (resolved !== null) {
-						document.getElementById('textInput').value = resolved;
-					}
-				});
-			}
+			cardData += message.body;
 			
-			appBar.addEventListener('beforeshow', appBarOpen);
-			appBar.addEventListener('beforehide', appBarClose);
-		});
-		
-		document.getElementById('textInput').value = '';
-	},
+			Jonathan.cards.pushCard(message.appName, cardData);
+		} */// Disabled for testing
 	
-	// Avatar related code
-	avatar: {
-		// Methods of animation
-		animationMethods: {
-			FRACTIONALIZE:   "FRACTIONALIZE",  // Cuts the outer circle into multiple parts and spins them
-			SPEAK:           "SPEAK",          // Rotates the inner line 90 degrees, widens it, and and then flexes it's vertical height like a mouth
-			ROTATE_INNER:    "ROTATE_INNER"    // Rotates the inner line
-		},
-		
-		// Function that animates Jonathan's avatar
-		animateAvatar: function(method /* a constant inside Jonathan.avatar.animationMethods */) {
-			//TODO: Add code to manipulate the avatar.
-		}
-	},
-	
-	processQuery: function(query) {
-		//TODO: Write code to send the string to the NLP engine.
-	},
-	
-	insertHTML: function (response /* HTML string */) {
-		//TODO: Write code to respond.
-		var content = document.getElementById('content');
-		WinJS.UI.Animation.exitContent(output, null).done(function () {
-	        content.innerHTML = '';
-	        content.innerHTML = response;
-	        return WinJS.UI.Animation.enterContent(output, null);
-	    });
 	},
 	
 	// Speech Recognition
@@ -95,7 +62,7 @@ var Jonathan = {
 			var appBar = document.getElementById('appBar').winControl;
 			appBar.disabled = true;
 			console.log('Error setting up audio: ' + e);
-			Jonathan.insertHTML = 'Sorry, but it looks like your browser can\'t accept speech input.  You can still type in the text box below.';
+			//Jonathan.insertHTML = 'Sorry, but it looks like your browser can\'t accept speech input.  You can still type in the text box below.';
 		}
 		
 		this.listenForActivationKeyword = function () {
@@ -151,24 +118,26 @@ var Jonathan = {
 		return chars[Math.floor(Math.random() * chars.length + 0)] + chars[Math.floor(Math.random() * chars.length + 0)] + chars[Math.floor(Math.random() * chars.length + 0)] + chars[Math.floor(Math.random() * chars.length + 0)] + chars[Math.floor(Math.random() * chars.length + 0)];
 	},
 	
-	// Predefined action patterns
-	speechIntents: {
-		TAKE_NOTE:       "TAKE_NOTE",
-		SET_ALARM:       "SET_ALARM",
-		SET_TIMER:       "SET_TIMER",
-		MUSIC:           "MUSIC",
-		ANSWER_QUESTION: "ANSWER_QUESTION"
+	cards: {
+		list: [
+		
+		
+		],
+		
+		pushCard: function (appName, data) {
+			var cardContainer = document.getElementsByClassName('cardContainer')[0];
+			
+			if (Jonathan.cards.list.indexOf(appName) == -1) {
+				var card = document.createElement('material-card');
+				card.id = appName + 'Card';
+				card.innerHTML = data;
+				cardContainer.appendChild(card);
+				Jonathan.cards.list.push(appName);
+			} else {
+				document.getElementById(appName + 'Card').innerHTML = data;
+			}
+			
+		}
 	}
 	
-}
-
-var createEvalTool = function () {
-	var evalTool = document.createElement('div');
-	evalTool.innerHTML = '<textbox style="width: 100px; height: 80px;" id="evalTB"></textbox><br\><button onclick="eval(document.getElementById(\"evalTB\").value)">Run Code </button>';
-	evalTool.style.border = '1px solid black';
-	evalTool.style.padding = '10px';
-	evalTool.style.top = "80px";
-	evalTool.style.right = "40px";
-	evalTool.style.position = "absolute";
-	document.body.appendChild(evalTool);
 }
